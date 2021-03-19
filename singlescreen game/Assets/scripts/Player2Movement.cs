@@ -15,7 +15,9 @@ public class Player2Movement : MonoBehaviour
     private Rigidbody2D myRB;
     private bool canJump;
     private SpriteRenderer mySprite;
-
+    private Color colour;
+    public GameObject skin;
+    private float alpha;
 
 
 
@@ -23,7 +25,7 @@ public class Player2Movement : MonoBehaviour
     {
         myRB = GetComponent<Rigidbody2D>();
         mySprite = GetComponentInChildren<SpriteRenderer>();
-       
+        alpha = 0f;
 
     }
 
@@ -44,7 +46,8 @@ public class Player2Movement : MonoBehaviour
         if (Mathf.Abs(myRB.velocity.x) < maxSpeed)
         {
             myRB.AddForce(moveAxis * moveSpeed, ForceMode2D.Force);
-         ;
+            alpha = ((myRB.velocity.x * moveSpeed) / (maxSpeed + moveSpeed) * moveDir);
+            skin.GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 0f, alpha);
         }
 
 
